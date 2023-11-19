@@ -4,9 +4,15 @@ import sys
 import ui
 import maze_solver
 
-def choose_size(a):
+def choose_size(generate_maze_algorythm):
     size = 0 
     input_text = ""
+    generate_by_dfs = False
+    generate_by_mst = False
+    if (generate_maze_algorythm):
+        generate_by_dfs = True
+    else:
+        generate_by_mst = True
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -49,7 +55,7 @@ def choose_size(a):
         ui.screen.blit(text_surface, text_rect)
 
         action = ui.create_gradient_button("OK", "generate")
-        if action == "generate" and a:
+        if action == "generate" and generate_by_dfs:
             try:
                 if (input_text == ""):
                     generate_maze_DFS(size)
@@ -60,7 +66,7 @@ def choose_size(a):
             except ValueError:
                 size = 50
                 generate_maze_DFS(size)
-        elif action == "generate" and not(a):
+        elif action == "generate" and generate_by_mst:
             try:
                 if (input_text == ""):
                     generate_maze_MST(size)
