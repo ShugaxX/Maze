@@ -40,24 +40,8 @@ def choose_size(generate_maze_algorythm):
                         if (len(input_text) < 2):
                           input_text += event.unicode
                           size = int(input_text)
-
-        ui.create_gradient_background()
-        ui.screen.blit(ui.text_caption_another, ui.text_caption_rect_another)
-
-        input_rect = pygame.Rect(ui.WIDTH // 2 - 100, ui.HEIGHT // 2, 200, 40)
-        input_rect.x = ui.WIDTH // 2 - 100
-        pygame.draw.rect(ui.screen, (255, 255, 255), input_rect)
-        pygame.draw.rect(ui.screen, (0, 0, 0), input_rect, 2)
-        text_surface = ui.font.render(input_text, True, (0, 0, 0))
-        text_rect = text_surface.get_rect()
-        text_rect.center = (ui.WIDTH // 2, ui.HEIGHT // 2 + 25)
-        ui.screen.blit(text_surface, text_rect)
-
-        text_surface = ui.font.render(f"Size: {size}", True, (0, 0, 0))
-        text_rect = text_surface.get_rect()
-        text_rect.center = (ui.WIDTH // 2, ui.HEIGHT // 2 - 50)
-        ui.screen.blit(text_surface, text_rect)
-
+    
+        ui.gui_for_choose_size(input_text, size)
         action = ui.create_gradient_button("OK", "generate")
         if action == "generate" and generate_by_dfs:
             try:
