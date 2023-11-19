@@ -4,6 +4,30 @@ import sys
 import ui
 import maze_solver
 
+def start_generate(generate_by_dfs, generate_by_mst, input_text):
+    if generate_by_dfs:
+        try:
+            if (input_text == ""):
+                generate_maze_DFS(size)
+            else:
+                  size = int(input_text)
+                  size = max(1, min(500, size)) 
+                  generate_maze_DFS(size)
+        except ValueError:
+            size = 50
+            generate_maze_DFS(size)
+    elif generate_by_mst:
+        try:
+            if (input_text == ""):
+                generate_maze_MST(size)
+            else:
+                size = int(input_text)
+                size = max(1, min(500, size)) 
+                generate_maze_MST(size)
+        except ValueError:
+            size = 50
+            generate_maze_MST(size)
+
 def choose_size(generate_maze_algorythm):
     size = 0 
     input_text = ""
@@ -43,28 +67,8 @@ def choose_size(generate_maze_algorythm):
     
         ui.gui_for_choose_size(input_text, size)
         action = ui.create_gradient_button("OK", "generate")
-        if action == "generate" and generate_by_dfs:
-            try:
-                if (input_text == ""):
-                    generate_maze_DFS(size)
-                else:
-                  size = int(input_text)
-                  size = max(1, min(500, size)) 
-                  generate_maze_DFS(size)
-            except ValueError:
-                size = 50
-                generate_maze_DFS(size)
-        elif action == "generate" and generate_by_mst:
-            try:
-                if (input_text == ""):
-                    generate_maze_MST(size)
-                else:
-                  size = int(input_text)
-                  size = max(1, min(500, size)) 
-                  generate_maze_MST(size)
-            except ValueError:
-                size = 50
-                generate_maze_MST(size)
+        if action == "generate":
+            start_generate(generate_by_dfs, generate_by_mst, input_text)
 
         pygame.display.update()
 
