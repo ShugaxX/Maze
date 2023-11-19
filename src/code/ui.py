@@ -98,3 +98,31 @@ def gui_for_choose_size(input_text, size):
     text_rect = text_surface.get_rect()
     text_rect.center = (WIDTH // 2, HEIGHT // 2 - 50)
     screen.blit(text_surface, text_rect)
+
+def gui_in_generate_window(l, CELL_SIZE, ROWS, grid):
+    pygame.draw.circle(ui.screen, 'Red', (CELL_SIZE + CELL_SIZE // 2, CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 2)
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    lenth = maze_solver.FindAPath(ROWS, grid, l[0], l[1], CELL_SIZE)
+                    text_of_len = ui.font.render(f"Length: {lenth}", False, 'Red')
+                    rect_of_len = text_of_len.get_rect(topleft = (0, ROWS * CELL_SIZE + 10))
+                    ui.screen.blit(text_of_len, rect_of_len)
+
+        action = ui.create_gradient_button("Save", "Save", ROWS * CELL_SIZE)
+        if (action == "Save"):
+            my_file = open("Data.txt", "w+")
+            for i in range(len(grid[0])):
+                for j in range(len(grid[0])):
+                    my_file.write(f"{grid[i][j]} ")
+                my_file.write("\n")
+            my_file.close()
+        action = ui.create_gradient_button("Quit", "Quit1", ROWS * CELL_SIZE)
+        if (action == "Quit1"):
+            pygame.quit()
+            sys.exit()
+        pygame.display.update()
