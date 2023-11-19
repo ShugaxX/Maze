@@ -1,7 +1,4 @@
 import pygame
-#import os
-#current_directory = os.path.dirname(os.path.abspath(__file__))
-#font_path = os.path.join(current_directory, 'Project', 'MyFont.ttf')
 pygame.init()
 
 WIDTH, HEIGHT = 800, 800
