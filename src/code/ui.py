@@ -21,11 +21,11 @@ def create_gradient_rect(surface, color1, color2, rect):
         )
         pygame.draw.line(surface, color, (rect.left, rect.top + y), (rect.right, rect.top + y))
 
-font = pygame.font.Font('MyFont.ttf', 36)
-font_yet = pygame.font.Font('MyFont.ttf', 70)
-font_another_yet = pygame.font.Font('MyFont.ttf', 12)
+font = pygame.font.Font('../fonts/MyFont.ttf', 36)
+font_yet = pygame.font.Font('../fonts/MyFont.ttf', 70)
+font_another_yet = pygame.font.Font('../fonts/MyFont.ttf', 12)
 
-pygame.mixer.music.load('background_music.mp3')
+pygame.mixer.music.load('../music/background_music.mp3')
 pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play(-1)
 
@@ -115,7 +115,7 @@ def gui_in_generate_window(l, CELL_SIZE, ROWS, grid):
 
         action = ui.create_gradient_button("Save", "Save", ROWS * CELL_SIZE)
         if (action == "Save"):
-            my_file = open("Data.txt", "w+")
+            my_file = open("../saved_maze/Data.txt", "w+")
             for i in range(len(grid[0])):
                 for j in range(len(grid[0])):
                     my_file.write(f"{grid[i][j]} ")
