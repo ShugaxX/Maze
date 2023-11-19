@@ -9,12 +9,16 @@ def choose_size(generate_maze_algorythm):
     input_text = ""
     generate_by_dfs = False
     generate_by_mst = False
+    
     if (generate_maze_algorythm):
         generate_by_dfs = True
     else:
         generate_by_mst = True
+        
     while True:
+        
         for event in pygame.event.get():
+            
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
@@ -87,8 +91,11 @@ def draw_grid(grid, ROWS, CELL_SIZE):
     ui.create_gradient_background()
     buffer_row = 0
     buffer_col = 0
+    
     for row in range(ROWS):
+        
         for col in range(ROWS):
+            
             if grid[row][col] == 1:
                 if (row == ROWS - 1 or col == ROWS - 1):
                     pygame.draw.rect(screen, 'Black', (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
@@ -104,8 +111,11 @@ def draw_grid(grid, ROWS, CELL_SIZE):
 
 def help_func(l, CELL_SIZE, ROWS, grid):
     pygame.draw.circle(ui.screen, 'Red', (CELL_SIZE + CELL_SIZE // 2, CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 2)
+    
     while True:
+        
         for event in pygame.event.get():
+            
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
@@ -119,7 +129,9 @@ def help_func(l, CELL_SIZE, ROWS, grid):
         action = ui.create_gradient_button("Save", "Save", ROWS * CELL_SIZE)
         if (action == "Save"):
             my_file = open("Data.txt", "w+")
+            
             for i in range(len(grid[0])):
+                
                 for j in range(len(grid[0])):
                     my_file.write(f"{grid[i][j]} ")
                 my_file.write("\n")
@@ -136,16 +148,19 @@ def DFS(grid, row, col, ROWS, CELL_SIZE):
     pygame.draw.rect(ui.screen, 'White', (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
     pygame.display.update()
     current_time = pygame.time.get_ticks()
+    
     while current_time % 30 != 0:
         current_time = pygame.time.get_ticks()
     directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
     random.shuffle(directions)
+    
     for dr, dc in directions:
         new_row, new_col = row + dr * 2, col + dc * 2
         if 0 < new_row < ROWS - 1 and 0 < new_col < ROWS - 1 and grid[new_row][new_col] == 1:
             grid[row + dr][col + dc] = 0
             pygame.draw.rect(ui.screen, 'White', ((col + dc) * CELL_SIZE, (row + dr) * CELL_SIZE, CELL_SIZE, CELL_SIZE))
             pygame.display.update()
+            
             while current_time % 30 != 0:
                 current_time = pygame.time.get_ticks()
             DFS(grid, new_row, new_col, ROWS, CELL_SIZE)
@@ -161,7 +176,9 @@ def generate_maze_DFS(SIZE):
     grid = [[1] * COLS for _ in range(ROWS)]
     screen = pygame.display.set_mode((ROWS * CELL_SIZE, ROWS * CELL_SIZE + 50))
     ui.create_gradient_background()
+    
     for row in range(ROWS):
+        
         for col in range(COLS):
             pygame.draw.rect(screen, 'Black', (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
     DFS(grid, 1, 1, ROWS, CELL_SIZE)
@@ -188,7 +205,9 @@ def generate_maze_MST(SIZE):
     grid = [[1] * COLS for _ in range(ROWS)]
     screen = pygame.display.set_mode((ROWS * CELL_SIZE, ROWS * CELL_SIZE + 50))
     ui.create_gradient_background()
+    
     for row in range(ROWS):
+        
         for col in range(COLS):
             pygame.draw.rect(screen, 'Black', (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
     start_x, start_y = 1, 1
@@ -207,12 +226,14 @@ def generate_maze_MST(SIZE):
             pygame.draw.rect(screen, 'White', (nx * CELL_SIZE, ny * CELL_SIZE, CELL_SIZE, CELL_SIZE))
             pygame.display.update()
             current_time = pygame.time.get_ticks()
+            
             while current_time % 30 != 0:
                 current_time = pygame.time.get_ticks()
             grid[y + (ny - y) // 2][x + (nx - x) // 2] = 0
             pygame.draw.rect(screen, 'White', ((x + (nx - x) // 2) * CELL_SIZE, (y + (ny - y) // 2) * CELL_SIZE, CELL_SIZE, CELL_SIZE))
             pygame.display.update()
             current_time = pygame.time.get_ticks()
+            
             while current_time % 30 != 0:
                 current_time = pygame.time.get_ticks()
             stack.append((nx, ny))
