@@ -82,3 +82,19 @@ def create_gradient_background():
     background_rect = pygame.Rect(0, 0, WIDTH, HEIGHT + 50)
     create_gradient_rect(screen, BACKGROUND_GRADIENT_START, BACKGROUND_GRADIENT_END, background_rect)
 
+def gui_for_choose_size(input_text, size):
+    create_gradient_background()
+    screen.blit(text_caption_another, text_caption_rect_another)
+    input_rect = pygame.Rect(WIDTH // 2 - 100, HEIGHT // 2, 200, 40)
+    input_rect.x = WIDTH // 2 - 100
+    pygame.draw.rect(screen, (255, 255, 255), input_rect)
+    pygame.draw.rect(screen, (0, 0, 0), input_rect, 2)
+    text_surface = font.render(input_text, True, (0, 0, 0))
+    text_rect = text_surface.get_rect()
+    text_rect.center = (WIDTH // 2, HEIGHT // 2 + 25)
+    screen.blit(text_surface, text_rect)
+
+    text_surface = font.render(f"Size: {size}", True, (0, 0, 0))
+    text_rect = text_surface.get_rect()
+    text_rect.center = (WIDTH // 2, HEIGHT // 2 - 50)
+    screen.blit(text_surface, text_rect)
