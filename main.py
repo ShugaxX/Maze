@@ -21,7 +21,7 @@ while True:
     action = ui.create_gradient_button("Load", "Load")
     if action == "Load":
         grid = []
-        my_file = open("Data.txt", "r")
+        my_file = open("src/saved_maze/Data.txt", "r")
         while True:
             line = my_file.readline()
             if not line:
