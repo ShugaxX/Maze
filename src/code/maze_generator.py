@@ -96,41 +96,6 @@ def draw_grid(grid, ROWS, CELL_SIZE):
     pygame.draw.circle(screen, 'Orange', (buffer_col * CELL_SIZE + CELL_SIZE // 2, buffer_row * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 2)
     return [buffer_row, buffer_col]
 
-
-def help_func(l, CELL_SIZE, ROWS, grid):
-    pygame.draw.circle(ui.screen, 'Red', (CELL_SIZE + CELL_SIZE // 2, CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 2)
-    
-    while True:
-        
-        for event in pygame.event.get():
-            
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    lenth = maze_solver.FindAPath(ROWS, grid, l[0], l[1], CELL_SIZE)
-                    text_of_len = ui.font.render(f"Length: {lenth}", False, 'Red')
-                    rect_of_len = text_of_len.get_rect(topleft = (0, ROWS * CELL_SIZE + 10))
-                    ui.screen.blit(text_of_len, rect_of_len)
-
-        action = ui.create_gradient_button("Save", "Save", ROWS * CELL_SIZE)
-        if (action == "Save"):
-            my_file = open("Data.txt", "w+")
-            
-            for i in range(len(grid[0])):
-                
-                for j in range(len(grid[0])):
-                    my_file.write(f"{grid[i][j]} ")
-                my_file.write("\n")
-            my_file.close()
-        action = ui.create_gradient_button("Quit", "Quit1", ROWS * CELL_SIZE)
-        if (action == "Quit1"):
-            pygame.quit()
-            sys.exit()
-        pygame.display.update()
-
-
 def DFS(grid, row, col, ROWS, CELL_SIZE):
     grid[row][col] = 0
     pygame.draw.rect(ui.screen, 'White', (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
@@ -171,7 +136,7 @@ def generate_maze_DFS(SIZE):
             pygame.draw.rect(screen, 'Black', (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
     DFS(grid, 1, 1, ROWS, CELL_SIZE)
     l = draw_grid(grid, ROWS, CELL_SIZE)
-    help_func(l, CELL_SIZE, ROWS, grid)
+    ui.gui_in_generate_window(l, CELL_SIZE, ROWS, grid)
 
 
 
@@ -228,4 +193,4 @@ def generate_maze_MST(SIZE):
         else:
             stack.pop()
     l = draw_grid(grid, ROWS, CELL_SIZE)
-    help_func(l, CELL_SIZE, ROWS, grid)
+    ui.gui_in_generate_window(l, CELL_SIZE, ROWS, grid)
