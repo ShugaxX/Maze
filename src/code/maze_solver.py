@@ -1,5 +1,7 @@
 import pygame
+
 import ui
+
 
 def MakeStep(ROWS, grid, k, m):
   for i in range(ROWS):
