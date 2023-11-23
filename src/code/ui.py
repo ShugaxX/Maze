@@ -1,7 +1,19 @@
+import sys
+import os
+
 import pygame
+
+import maze_solver
 
 
 pygame.init()
+
+current_path = os.path.dirname(os.path.realpath(__file__))
+font_path = os.path.join(current_path, '..', 'fonts', 'MyFont.ttf')
+current_path_another = os.path.dirname(os.path.realpath(__file__))
+music_path = os.path.join(current_path, '..', 'music', 'background_music.mp3')
+current_path_another = os.path.dirname(os.path.realpath(__file__))
+data_path = os.path.join(current_path, '..', 'saved_maze', 'Data.txt')
 
 WIDTH, HEIGHT = 800, 800
 
@@ -20,11 +32,11 @@ def create_gradient_rect(surface, color1, color2, rect):
         )
         pygame.draw.line(surface, color, (rect.left, rect.top + y), (rect.right, rect.top + y))
 
-font = pygame.font.Font('../fonts/MyFont.ttf', 36)
-font_yet = pygame.font.Font('../fonts/MyFont.ttf', 70)
-font_another_yet = pygame.font.Font('../fonts/MyFont.ttf', 12)
+font = pygame.font.Font(font_path, 36)
+font_yet = pygame.font.Font(font_path, 70)
+font_another_yet = pygame.font.Font(font_path, 12)
 
-pygame.mixer.music.load('../music/background_music.mp3')
+pygame.mixer.music.load(music_path)
 pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play(-1)
 
@@ -99,7 +111,7 @@ def gui_for_choose_size(input_text, size):
     screen.blit(text_surface, text_rect)
 
 def gui_in_generate_window(l, CELL_SIZE, ROWS, grid):
-    pygame.draw.circle(ui.screen, 'Red', (CELL_SIZE + CELL_SIZE // 2, CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 2)
+    pygame.draw.circle(screen, 'Red', (CELL_SIZE + CELL_SIZE // 2, CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 2)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -108,19 +120,19 @@ def gui_in_generate_window(l, CELL_SIZE, ROWS, grid):
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     lenth = maze_solver.FindAPath(ROWS, grid, l[0], l[1], CELL_SIZE)
-                    text_of_len = ui.font.render(f"Length: {lenth}", False, 'Red')
+                    text_of_len = font.render(f"Length: {lenth}", False, 'Red')
                     rect_of_len = text_of_len.get_rect(topleft = (0, ROWS * CELL_SIZE + 10))
-                    ui.screen.blit(text_of_len, rect_of_len)
+                    screen.blit(text_of_len, rect_of_len)
 
-        action = ui.create_gradient_button("Save", "Save", ROWS * CELL_SIZE)
+        action = create_gradient_button("Save", "Save", ROWS * CELL_SIZE)
         if (action == "Save"):
-            my_file = open("../saved_maze/Data.txt", "w+")
+            my_file = open(data_path, "w+")
             for i in range(len(grid[0])):
                 for j in range(len(grid[0])):
                     my_file.write(f"{grid[i][j]} ")
                 my_file.write("\n")
             my_file.close()
-        action = ui.create_gradient_button("Quit", "Quit1", ROWS * CELL_SIZE)
+        action = create_gradient_button("Quit", "Quit1", ROWS * CELL_SIZE)
         if (action == "Quit1"):
             pygame.quit()
             sys.exit()
