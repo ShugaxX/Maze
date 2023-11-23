@@ -3,8 +3,7 @@ import sys
 
 import pygame
 
-import ui
-import maze_solver
+import src.code.ui as ui
 
 
 def start_generate(generate_by_dfs, generate_by_mst, input_text):
