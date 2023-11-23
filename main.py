@@ -1,7 +1,11 @@
-import pygame
 import sys
-from src.code import ui
-from src.code import maze_generator
+
+import pygame
+
+from src.code.ui as ui
+from src.code.maze_generator as maze_generator
+
+
 pygame.init()
 
 while True:
