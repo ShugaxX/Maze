@@ -34,7 +34,7 @@ while True:
         my_file.close()
         print(grid)
         l = maze_generator.draw_grid(grid, len(grid[0]), ui.WIDTH // len(grid[0]))
-        maze_generator.help_func(l, ui.WIDTH // len(grid[0]), len(grid[0]), grid)
+        ui.gui_in_generate_window(l, ui.WIDTH // len(grid[0]), len(grid[0]), grid)
     action = ui.create_gradient_button("Quit", "Quit")
     if action == "Quit":
         pygame.quit()
