@@ -2,8 +2,8 @@ import sys
 
 import pygame
 
-from src.code.ui as ui
-from src.code.maze_generator as maze_generator
+import src.code.ui as ui
+import src.code.maze_generator as maze_generator
 
 
 pygame.init()
