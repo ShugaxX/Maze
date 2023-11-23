@@ -1,6 +1,6 @@
 import pygame
 
-import ui
+import src.code.ui as ui
 
 
 def MakeStep(ROWS, grid, k, m):
