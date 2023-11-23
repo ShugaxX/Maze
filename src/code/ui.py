@@ -3,7 +3,7 @@ import os
 
 import pygame
 
-import maze_solver
+import src.code.maze_solver as maze_solver
 
 
 pygame.init()
